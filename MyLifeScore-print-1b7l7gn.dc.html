@@ -1,0 +1,1155 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style data-omelette-print-defaults>
+@media print {
+  @page { margin: 0.5in; }
+  h1, h2, h3, h4, h5, h6 { break-after: avoid; }
+  figure, table, pre, blockquote, img, svg, tr, [class~="card" i] { break-inside: avoid; }
+  img, svg { max-width: 100%; }
+  p { orphans: 3; widows: 3; }
+}
+</style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="_ds/modernist-3153961f-303a-44f8-8dfd-351982956f20/styles.css">
+  <script src="_ds/modernist-3153961f-303a-44f8-8dfd-351982956f20/_ds_bundle.js"></script>
+  <style>
+    :root {
+      --color-accent: #2563eb;
+      --color-accent-100: oklch(0.95 0.025 262);
+      --color-accent-200: oklch(0.90 0.055 262);
+      --color-accent-300: oklch(0.82 0.10 262);
+      --color-accent-400: oklch(0.68 0.16 262);
+      --color-accent-500: oklch(0.55 0.21 262);
+      --color-accent-600: oklch(0.48 0.19 262);
+      --color-accent-700: oklch(0.42 0.16 262);
+      --color-accent-800: oklch(0.34 0.12 262);
+      --color-accent-900: oklch(0.27 0.09 262);
+      --color-accent-2: var(--color-accent);
+      --color-accent-2-100: var(--color-accent-100);
+      --color-accent-2-200: var(--color-accent-200);
+      --color-accent-2-300: var(--color-accent-300);
+      --color-accent-2-500: var(--color-accent-500);
+      --color-accent-2-700: var(--color-accent-700);
+      --color-accent-2-900: var(--color-accent-900);
+    }
+    body { margin: 0; background: var(--color-bg); }
+    a { color: var(--color-accent-700); }
+    a:hover { color: var(--color-accent); }
+    @keyframes msPulse { 0% { transform: scaleX(0); } 100% { transform: scaleX(1); } }
+    @keyframes msBlink { 0%,100% { opacity: 1; } 50% { opacity: .25; } }
+  </style>
+</helmet>
+
+<div style="min-height: 100vh; background: var(--color-bg); color: var(--color-text); font-family: var(--font-body); display: flex; flex-direction: column;">
+
+  <!-- NAV -->
+  <div style="display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 18px 32px; border-bottom: 2px solid var(--color-divider);">
+    <div onClick="{{ goLanding }}" style="font-family: var(--font-heading); font-weight: 800; font-size: 18px; letter-spacing: .06em; cursor: pointer;">MYLIFESCORE<span style="color: var(--color-accent);">.</span></div>
+    <div style="display: flex; align-items: center; gap: 16px;">
+      <div style="font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: var(--color-neutral-600);">{{ navHint }}</div>
+    </div>
+  </div>
+
+  <!-- ===================== LANDING ===================== -->
+  <sc-if value="{{ isLanding }}" hint-placeholder-val="{{ true }}">
+    <div data-screen-label="Landing">
+
+      <!-- HERO -->
+      <div style="display: grid; grid-template-columns: 1.1fr 1fr; gap: 48px; padding: 72px 32px 64px; border-bottom: 2px solid var(--color-divider); max-width: 1200px; margin: 0 auto; box-sizing: border-box;">
+        <div style="display: flex; flex-direction: column; align-items: flex-start; gap: 28px;">
+          <h1 style="font-family: var(--font-heading); font-weight: 800; font-size: 58px; line-height: 1.04; margin: 0; letter-spacing: -0.01em;">Амьдралаа хэмж.<br>Өөрийгөө ойлго.<br>Өдөр бүр сайжир.</h1>
+          <p style="font-size: 18px; line-height: 1.55; margin: 0; max-width: 480px; color: var(--color-neutral-700);">MyLifeScore таны амьдралын 8 үндсэн салбарыг шинжлэх ухаанчаар үнэлж, AI ашиглан хувь хүнд тохирсон бүрэн тайлан гаргана. Тайлан таны имэйл рүү илгээгдэнэ.</p>
+          <div style="display: flex; gap: 12px; align-items: center;">
+            <button class="btn btn-primary" onClick="{{ startAssessment }}" style="font-size: 16px; padding: 14px 28px;">Үнэгүй эхлэх →</button>
+            <div style="font-size: 13px; color: var(--color-neutral-600);">24 асуулт · 5 минут · Нийт оноо үнэгүй</div>
+          </div>
+        </div>
+
+        <!-- Score preview -->
+        <div class="card elev-sm" style="padding: 28px; display: flex; flex-direction: column; gap: 12px;">
+          <div style="display: flex; justify-content: space-between; align-items: baseline; border-bottom: 2px solid var(--color-divider); padding-bottom: 12px;">
+            <div style="font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--color-neutral-600);">Life Score — жишээ</div>
+            <div style="font-family: var(--font-heading); font-weight: 800; font-size: 40px;">72<span style="font-size: 16px; color: var(--color-neutral-500);">/100</span></div>
+          </div>
+          <svg viewBox="-45 0 390 300" style="width: 100%; height: auto;">
+            <polygon points="150,30 234.9,65.1 270,150 234.9,234.9 150,270 65.1,234.9 30,150 65.1,65.1" fill="none" stroke="var(--color-neutral-300)" stroke-width="1"></polygon>
+            <polygon points="150,90 192.4,107.6 210,150 192.4,192.4 150,210 107.6,192.4 90,150 107.6,107.6" fill="none" stroke="var(--color-neutral-300)" stroke-width="1"></polygon>
+            <line x1="150" y1="150" x2="150" y2="30" stroke="var(--color-neutral-200)" stroke-width="1"></line>
+            <line x1="150" y1="150" x2="270" y2="150" stroke="var(--color-neutral-200)" stroke-width="1"></line>
+            <line x1="150" y1="150" x2="150" y2="270" stroke="var(--color-neutral-200)" stroke-width="1"></line>
+            <line x1="150" y1="150" x2="30" y2="150" stroke="var(--color-neutral-200)" stroke-width="1"></line>
+            <polygon points="150,51.6 204.3,95.7 216,150 210.2,210.2 150,242.4 99.1,200.9 68.4,150 87.2,87.2" fill="var(--color-accent-200)" fill-opacity="0.55" stroke="var(--color-accent)" stroke-width="2"></polygon>
+            <text x="150" y="20" text-anchor="middle" font-size="13" fill="var(--color-neutral-700)">Эрүүл мэнд</text>
+            <text x="244" y="60" text-anchor="start" font-size="13" fill="var(--color-neutral-700)">Сэтгэл зүй</text>
+            <text x="278" y="154" text-anchor="start" font-size="13" fill="var(--color-neutral-700)">Санхүү</text>
+            <text x="244" y="248" text-anchor="start" font-size="13" fill="var(--color-neutral-700)">Карьер</text>
+            <text x="150" y="290" text-anchor="middle" font-size="13" fill="var(--color-neutral-700)">Харилцаа</text>
+            <text x="56" y="248" text-anchor="end" font-size="13" fill="var(--color-neutral-700)">Нийгэм</text>
+            <text x="22" y="154" text-anchor="end" font-size="13" fill="var(--color-neutral-700)">Хөгжил</text>
+            <text x="56" y="60" text-anchor="end" font-size="13" fill="var(--color-neutral-700)">Зорилго</text>
+          </svg>
+        </div>
+      </div>
+
+      <!-- HOW IT WORKS -->
+      <div style="max-width: 1200px; margin: 0 auto; padding: 56px 32px; border-bottom: 2px solid var(--color-divider); box-sizing: border-box;">
+        <div style="font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--color-accent-700); margin-bottom: 24px;">Хэрхэн ажилладаг вэ</div>
+        <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; border-top: 2px solid var(--color-text);">
+          <div style="padding: 20px 20px 20px 0; border-right: 1px solid var(--color-divider);">
+            <div style="font-family: var(--font-heading); font-weight: 800; font-size: 28px; color: var(--color-accent);">01</div>
+            <div style="font-weight: 700; margin: 8px 0 6px;">Асуултад хариулна</div>
+            <div style="font-size: 14px; color: var(--color-neutral-600); line-height: 1.5;">8 салбарын 24 асуулт. 5 минут л хангалттай.</div>
+          </div>
+          <div style="padding: 20px; border-right: 1px solid var(--color-divider);">
+            <div style="font-family: var(--font-heading); font-weight: 800; font-size: 28px; color: var(--color-accent);">02</div>
+            <div style="font-weight: 700; margin: 8px 0 6px;">Оноогоо харна</div>
+            <div style="font-size: 14px; color: var(--color-neutral-600); line-height: 1.5;">Нийт Life Score болон radar зураглал — үнэгүй.</div>
+          </div>
+          <div style="padding: 20px; border-right: 1px solid var(--color-divider);">
+            <div style="font-family: var(--font-heading); font-weight: 800; font-size: 28px; color: var(--color-accent);">03</div>
+            <div style="font-weight: 700; margin: 8px 0 6px;">Төлбөрөө төлнө</div>
+            <div style="font-size: 14px; color: var(--color-neutral-600); line-height: 1.5;">19,900₮ — QPay эсвэл QR кодоор шууд.</div>
+          </div>
+          <div style="padding: 20px;">
+            <div style="font-family: var(--font-heading); font-weight: 800; font-size: 28px; color: var(--color-accent);">04</div>
+            <div style="font-weight: 700; margin: 8px 0 6px;">Зөвлөгөө, үр дүнгээ авна</div>
+            <div style="font-size: 14px; color: var(--color-neutral-600); line-height: 1.5;">AI бүрэн тайлан таны имэйл рүү илгээгдэнэ.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SCIENCE -->
+      <div style="max-width: 1200px; margin: 0 auto; padding: 56px 32px; border-bottom: 2px solid var(--color-divider); box-sizing: border-box;">
+        <div style="font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--color-accent-700); margin-bottom: 16px;">The Science Behind MyLifeScore</div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start;">
+          <div style="display: flex; flex-direction: column; gap: 16px;">
+            <h2 style="font-family: var(--font-heading); font-weight: 800; font-size: 36px; line-height: 1.1; margin: 0;">Таамаг биш, шинжлэх ухаанд суурилсан.</h2>
+            <p style="font-size: 16px; line-height: 1.6; color: var(--color-neutral-700); margin: 0;">MyLifeScore нь олон улсад хүлээн зөвшөөрөгдсөн судалгаа, framework-үүдээс санаа авч боловсруулсан үнэлгээний систем юм. Эдгээр ойлголтыг нэгтгэсэн <b>MyLifeScore Life Intelligence Engine</b> нь таны өөрийгөө үнэлсэн мэдээллийг ашиглан хувь хүний хөгжлийн чиглэл, эрсдэл, боломжийг тодорхойлдог.</p>
+            <p style="font-size: 14px; line-height: 1.6; color: var(--color-neutral-600); margin: 0;">Асуулт бүр аль нэг framework-ийн хэмжигддэг үзүүлэлтэд суурилсан бөгөөд 8 салбарын жинлэсэн алгоритмаар нэгтгэгдэнэ.</p>
+          </div>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0; border-top: 2px solid var(--color-text);">
+            <div style="padding: 16px 16px 16px 0; border-bottom: 1px solid var(--color-divider); border-right: 1px solid var(--color-divider);">
+              <div style="font-weight: 700; font-size: 15px;">Wheel of Life</div>
+              <div style="font-size: 13px; color: var(--color-neutral-600); line-height: 1.5; margin-top: 4px;">Коучингийн сонгодог framework — амьдралын салбаруудын тэнцвэрийг хэмжих загвар.</div>
+            </div>
+            <div style="padding: 16px; border-bottom: 1px solid var(--color-divider);">
+              <div style="font-weight: 700; font-size: 15px;">PERMA — Positive Psychology</div>
+              <div style="font-size: 13px; color: var(--color-neutral-600); line-height: 1.5; margin-top: 4px;">Мартин Селигманы аз жаргалын 5 суурь элементийн онол.</div>
+            </div>
+            <div style="padding: 16px 16px 16px 0; border-bottom: 1px solid var(--color-divider); border-right: 1px solid var(--color-divider);">
+              <div style="font-weight: 700; font-size: 15px;">WHO Well-being Model</div>
+              <div style="font-size: 13px; color: var(--color-neutral-600); line-height: 1.5; margin-top: 4px;">ДЭМБ-ын сайн сайхан байдлын цогц загвар — бие, сэтгэц, нийгмийн эрүүл мэнд.</div>
+            </div>
+            <div style="padding: 16px; border-bottom: 1px solid var(--color-divider);">
+              <div style="font-weight: 700; font-size: 15px;">Satisfaction With Life Scale</div>
+              <div style="font-size: 13px; color: var(--color-neutral-600); line-height: 1.5; margin-top: 4px;">Динерийн амьдралын сэтгэл ханамжийг хэмжих баталгаажсан хэмжүүр.</div>
+            </div>
+            <div style="padding: 16px 16px 16px 0; border-right: 1px solid var(--color-divider);">
+              <div style="font-weight: 700; font-size: 15px;">Financial Wellness</div>
+              <div style="font-size: 13px; color: var(--color-neutral-600); line-height: 1.5; margin-top: 4px;">Санхүүгийн аюулгүй байдал, хяналт, хуримтлалын зарчмууд.</div>
+            </div>
+            <div style="padding: 16px;">
+              <div style="font-weight: 700; font-size: 15px;">Self-Determination Theory</div>
+              <div style="font-size: 13px; color: var(--color-neutral-600); line-height: 1.5; margin-top: 4px;">Дотоод сэдэл, бие даасан байдал, өсөлтийн сэтгэл зүйн онол.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PRICING -->
+      <div style="max-width: 1200px; margin: 0 auto; padding: 56px 32px; box-sizing: border-box;">
+        <div style="font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--color-accent-700); margin-bottom: 24px;">Үнэ</div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px;">
+          <div class="card" style="padding: 28px; display: flex; flex-direction: column; gap: 12px; align-items: flex-start;">
+            <div class="tag tag-neutral">ҮНЭГҮЙ</div>
+            <div style="font-family: var(--font-heading); font-weight: 800; font-size: 36px;">0₮</div>
+            <div style="font-size: 15px; line-height: 1.7; color: var(--color-neutral-700);">Нийт Life Score<br>Radar зураглал<br>Түвшний тодорхойлолт</div>
+          </div>
+          <div class="card elev-md" style="padding: 28px; display: flex; flex-direction: column; gap: 12px; align-items: flex-start; border: 2px solid var(--color-accent);">
+            <div class="tag tag-accent">БҮРЭН ТАЙЛАН</div>
+            <div style="font-family: var(--font-heading); font-weight: 800; font-size: 36px;">{{ priceFmt }}₮</div>
+            <div style="font-size: 15px; line-height: 1.7; color: var(--color-neutral-700);">Салбар бүрийн задаргаа<br>Давуу / сул тал TOP-3<br>AI зөвлөгөө + 30 хоногийн төлөвлөгөө<br>Тайлан имэйлээр (PDF)</div>
+            <button class="btn btn-primary" onClick="{{ startAssessment }}">Эхлэх →</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- POSTER CLOSE -->
+      <div style="background: var(--color-accent); color: #fff; padding: 64px 32px;">
+        <div style="max-width: 1200px; margin: 0 auto;">
+          <div style="font-family: var(--font-heading); font-weight: 800; font-size: 44px; line-height: 1.1; max-width: 700px;">Таны амьдралын кредит оноо.</div>
+          <button class="btn" onClick="{{ startAssessment }}" style="margin-top: 28px; background: #fff; color: var(--color-accent); border: none; font-size: 16px; padding: 14px 28px; cursor: pointer;">Үнэгүй эхлэх →</button>
+        </div>
+      </div>
+
+      <div style="padding: 20px 32px; font-size: 12px; color: var(--color-neutral-500); display: flex; justify-content: space-between;">
+        <div>© 2026 MyLifeScore</div>
+        <div>hello@mylifescore.mn</div>
+      </div>
+    </div>
+  </sc-if>
+
+  <!-- ===================== INFO ===================== -->
+  <sc-if value="{{ isInfo }}" hint-placeholder-val="{{ false }}">
+    <div data-screen-label="User info" style="max-width: 560px; margin: 0 auto; padding: 56px 32px; width: 100%; box-sizing: border-box;">
+      <div style="font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--color-accent-700);">Алхам 1 / 2</div>
+      <h2 style="font-family: var(--font-heading); font-weight: 800; font-size: 34px; margin: 12px 0 8px;">Таны мэдээлэл</h2>
+      <p style="color: var(--color-neutral-600); margin: 0 0 32px; font-size: 15px;">Үнэлгээг таны нас, амьдралын нөхцөлд тааруулахад ашиглана.</p>
+      <div style="display: flex; flex-direction: column; gap: 20px;">
+        <div class="field"><label>Нэр</label><input class="input" value="{{ infoName }}" onChange="{{ setName }}" placeholder="Таны нэр"></div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+          <div class="field"><label>Нас</label><input class="input" value="{{ infoAge }}" onChange="{{ setAge }}" placeholder="27" type="number"></div>
+          <div class="field"><label>Мэргэжил</label><input class="input" value="{{ infoJob }}" onChange="{{ setJob }}" placeholder="Инженер"></div>
+        </div>
+        <div class="field">
+          <label>Хүйс</label>
+          <div class="seg">
+            <sc-for list="{{ genderOpts }}" as="g" hint-placeholder-count="3">
+              <button class="seg-opt" onClick="{{ g.pick }}" style="{{ g.style }}">{{ g.label }}</button>
+            </sc-for>
+          </div>
+        </div>
+        <div class="field">
+          <label>Харилцааны байдал</label>
+          <div class="seg">
+            <sc-for list="{{ relOpts }}" as="r" hint-placeholder-count="3">
+              <button class="seg-opt" onClick="{{ r.pick }}" style="{{ r.style }}">{{ r.label }}</button>
+            </sc-for>
+          </div>
+        </div>
+        <button class="btn btn-primary btn-block" onClick="{{ startQuiz }}" style="margin-top: 8px; font-size: 16px; padding: 14px 20px;">Асуулга эхлэх →</button>
+      </div>
+    </div>
+  </sc-if>
+
+  <!-- ===================== QUIZ ===================== -->
+  <sc-if value="{{ isQuiz }}" hint-placeholder-val="{{ false }}">
+    <div data-screen-label="Assessment" style="max-width: 680px; margin: 0 auto; padding: 48px 32px; width: 100%; box-sizing: border-box;">
+      <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 10px;">
+        <div style="font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--color-accent-700);">{{ qPillar }}</div>
+        <div style="font-size: 13px; color: var(--color-neutral-600);">{{ qNum }} / {{ qTotal }}</div>
+      </div>
+      <div style="height: 4px; background: var(--color-neutral-200); margin-bottom: 40px;">
+        <div style="height: 4px; background: var(--color-accent); width: {{ progressPct }}%; transition: width .3s;"></div>
+      </div>
+      <h2 style="font-family: var(--font-heading); font-weight: 800; font-size: 32px; line-height: 1.2; margin: 0 0 12px;">{{ qText }}</h2>
+      <p style="font-size: 14px; color: var(--color-neutral-600); line-height: 1.55; margin: 0 0 32px; border-left: 2px solid var(--color-accent); padding-left: 12px;">{{ qHook }}</p>
+      <div style="display: flex; flex-direction: column; gap: 10px;">
+        <sc-for list="{{ likert }}" as="opt" hint-placeholder-count="5">
+          <button onClick="{{ opt.pick }}" style="{{ opt.style }}" style-hover="border-color: var(--color-accent); background: var(--color-accent-100);">
+            <span style="font-family: var(--font-heading); font-weight: 800; width: 24px; display: inline-block;">{{ opt.n }}</span>
+            <span>{{ opt.label }}</span>
+          </button>
+        </sc-for>
+      </div>
+      <div style="margin-top: 28px;">
+        <button class="btn btn-ghost" onClick="{{ prevQuestion }}">← Буцах</button>
+      </div>
+    </div>
+  </sc-if>
+
+  <!-- ===================== LOADING ===================== -->
+  <sc-if value="{{ isLoading }}" hint-placeholder-val="{{ false }}">
+    <div data-screen-label="Loading" style="flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 80px 32px; gap: 28px;">
+      <div style="width: 280px; height: 4px; background: var(--color-neutral-200); overflow: hidden;">
+        <div style="height: 4px; background: var(--color-accent); transform-origin: left; animation: msPulse 4.4s linear forwards;"></div>
+      </div>
+      <div style="font-family: var(--font-heading); font-weight: 700; font-size: 22px; animation: msBlink 1.1s infinite;">{{ loadingMsg }}</div>
+    </div>
+  </sc-if>
+
+  <!-- ===================== RESULT ===================== -->
+  <sc-if value="{{ isResult }}" hint-placeholder-val="{{ false }}">
+    <div data-screen-label="Result" style="max-width: 1000px; margin: 0 auto; padding: 48px 32px; width: 100%; box-sizing: border-box;">
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px; border-bottom: 2px solid var(--color-divider); padding-bottom: 40px;">
+        <div style="display: flex; flex-direction: column; gap: 16px; align-items: flex-start;">
+          <div class="tag tag-accent">{{ resultName }} — ТАНЫ LIFE SCORE</div>
+          <div style="font-family: var(--font-heading); font-weight: 800; font-size: 120px; line-height: 1;">{{ overall }}<span style="font-size: 32px; color: var(--color-neutral-500);">/100</span></div>
+          <div style="font-family: var(--font-heading); font-weight: 700; font-size: 24px; color: var(--color-accent-700);">{{ scoreLabel }}</div>
+          <p style="font-size: 15px; color: var(--color-neutral-700); line-height: 1.6; margin: 0;">{{ scoreDesc }}</p>
+        </div>
+        <svg viewBox="-45 0 390 300" style="width: 100%; height: auto;">
+          <polygon points="150,30 234.9,65.1 270,150 234.9,234.9 150,270 65.1,234.9 30,150 65.1,65.1" fill="none" stroke="var(--color-neutral-300)" stroke-width="1"></polygon>
+          <polygon points="150,90 192.4,107.6 210,150 192.4,192.4 150,210 107.6,192.4 90,150 107.6,107.6" fill="none" stroke="var(--color-neutral-300)" stroke-width="1"></polygon>
+          <polygon points="{{ radarPoints }}" fill="var(--color-accent-200)" fill-opacity="0.55" stroke="var(--color-accent)" stroke-width="2"></polygon>
+          <text x="150" y="20" text-anchor="middle" font-size="13" fill="var(--color-neutral-700)">Эрүүл мэнд</text>
+          <text x="244" y="60" text-anchor="start" font-size="13" fill="var(--color-neutral-700)">Сэтгэл зүй</text>
+          <text x="278" y="154" text-anchor="start" font-size="13" fill="var(--color-neutral-700)">Санхүү</text>
+          <text x="244" y="248" text-anchor="start" font-size="13" fill="var(--color-neutral-700)">Карьер</text>
+          <text x="150" y="290" text-anchor="middle" font-size="13" fill="var(--color-neutral-700)">Харилцаа</text>
+          <text x="56" y="248" text-anchor="end" font-size="13" fill="var(--color-neutral-700)">Нийгэм</text>
+          <text x="22" y="154" text-anchor="end" font-size="13" fill="var(--color-neutral-700)">Хөгжил</text>
+          <text x="56" y="60" text-anchor="end" font-size="13" fill="var(--color-neutral-700)">Зорилго</text>
+        </svg>
+      </div>
+
+      <!-- LOCKED / UNLOCKED DETAIL -->
+      <sc-if value="{{ locked }}" hint-placeholder-val="{{ false }}">
+        <div style="position: relative; margin-top: 40px;">
+          <div style="filter: blur(7px); pointer-events: none; user-select: none; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px;">
+            <div class="card" style="padding: 24px; height: 180px;"><div class="card-kicker">Давуу тал</div><div style="margin-top: 12px; line-height: 1.8;">Эрүүл мэнд — 84<br>Хөгжил — 78<br>Карьер — 72</div></div>
+            <div class="card" style="padding: 24px; height: 180px;"><div class="card-kicker">Сул тал</div><div style="margin-top: 12px; line-height: 1.8;">Санхүү — 41<br>Нийгэм — 48<br>Зорилго — 55</div></div>
+            <div class="card" style="padding: 24px; height: 180px;"><div class="card-kicker">Сарын зорилго</div><div style="margin-top: 12px; line-height: 1.8;">Долоо хоног бүр төсөв гаргаж, зарлагаа бүртгэх.</div></div>
+          </div>
+          <div class="card elev-lg" style="position: absolute; inset: 0; margin: auto; max-width: 520px; height: fit-content; padding: 32px; display: flex; flex-direction: column; gap: 12px; align-items: flex-start; border: 2px solid var(--color-text);">
+            <div class="tag tag-accent">🔒 БҮРЭН ТАЙЛАН ТҮГЖЭЭТЭЙ</div>
+            <div style="font-family: var(--font-heading); font-weight: 800; font-size: 24px;">AI бүрэн тайлангаа аваарай</div>
+            <div style="font-size: 14px; color: var(--color-neutral-700); line-height: 1.6;">Салбар бүрийн задаргаа, давуу/сул тал, эрсдэл, 30 хоногийн төлөвлөгөө — таны имэйл рүү илгээгдэнэ.</div>
+            <button class="btn btn-primary" onClick="{{ openPay }}" style="font-size: 16px; padding: 14px 24px;">Тайлан авах — {{ priceFmt }}₮</button>
+          </div>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ unlockedView }}" hint-placeholder-val="{{ false }}">
+        <div style="margin-top: 40px; display: flex; flex-direction: column; gap: 32px;">
+          <div class="card" style="padding: 18px 24px; border-left: 4px solid var(--color-accent); display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap;">
+            <div style="font-size: 14px;">✓ Төлбөр амжилттай. Бүрэн тайлан (PDF) <b>{{ email }}</b> хаяг руу илгээгдлээ.</div>
+            <div class="tag tag-neutral">#{{ orderNo }}</div>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px;">
+            <div class="card" style="padding: 24px;">
+              <div class="card-kicker" style="color: var(--color-accent-700);">Давуу тал — TOP 3</div>
+              <div style="margin-top: 14px; display: flex; flex-direction: column; gap: 10px;">
+                <sc-for list="{{ strengths }}" as="s" hint-placeholder-count="3">
+                  <div style="display: flex; justify-content: space-between; border-bottom: 1px solid var(--color-divider); padding-bottom: 8px;"><span>{{ s.name }}</span><b>{{ s.score }}</b></div>
+                </sc-for>
+              </div>
+            </div>
+            <div class="card" style="padding: 24px;">
+              <div class="card-kicker" style="color: var(--color-accent-700);">Сул тал — TOP 3</div>
+              <div style="margin-top: 14px; display: flex; flex-direction: column; gap: 10px;">
+                <sc-for list="{{ weaknesses }}" as="w" hint-placeholder-count="3">
+                  <div style="display: flex; justify-content: space-between; border-bottom: 1px solid var(--color-divider); padding-bottom: 8px;"><span>{{ w.name }}</span><b style="color: var(--color-accent);">{{ w.score }}</b></div>
+                </sc-for>
+              </div>
+            </div>
+            <div class="card" style="padding: 24px;">
+              <div class="card-kicker" style="color: var(--color-accent-700);">Тэнцвэрийн зөрүү</div>
+              <div style="margin-top: 14px; font-family: var(--font-heading); font-weight: 800; font-size: 40px;">{{ balance }}<span style="font-size: 16px; color: var(--color-neutral-500);"> оноо</span></div>
+              <div style="font-size: 13px; color: var(--color-neutral-600); margin-top: 6px;">{{ balanceLabel }} — хамгийн өндөр ба бага онооны зөрүү. Зөрүү бага байх тусам амьдрал тогтвортой мэдрэгддэг.</div>
+            </div>
+          </div>
+
+          <!-- FOCUS OF THE MONTH -->
+          <div class="card elev-md" style="padding: 32px; background: var(--color-text); color: var(--color-bg); display: grid; grid-template-columns: 1fr 1.4fr; gap: 32px;">
+            <div style="display: flex; flex-direction: column; gap: 12px; align-items: flex-start;">
+              <div style="font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--color-accent-300);">Энэ сарын онцлох зорилго</div>
+              <div style="font-family: var(--font-heading); font-weight: 800; font-size: 32px; line-height: 1.15;">{{ focusName }}</div>
+              <div style="display: flex; align-items: baseline; gap: 8px;"><span style="font-family: var(--font-heading); font-weight: 800; font-size: 48px; color: var(--color-accent-300);">{{ focusScore }}</span><span style="font-size: 14px; opacity: .7;">/100 — одоогийн оноо</span></div>
+              <div style="border: 2px solid var(--color-accent-300); padding: 14px 16px; font-family: var(--font-heading); font-weight: 700; font-size: 17px; line-height: 1.4;">{{ monthlyGoal }}</div>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 10px;">
+              <div style="font-size: 12px; letter-spacing: .12em; text-transform: uppercase; opacity: .6;">Яагаад яг энэ салбар вэ?</div>
+              <p style="font-size: 15px; line-height: 1.7; margin: 0; opacity: .92;">{{ focusReason }}</p>
+              <div style="font-size: 13px; opacity: .6; margin-top: auto;">30 хоногийн дараа дахин үнэлгээ хийж ахицаа хэмжээрэй — нэг салбарт төвлөрсөн сар нийт оноог дунджаар 9–14 пунктээр өсгөдөг.</div>
+            </div>
+          </div>
+
+          <!-- PILLAR BREAKDOWN -->
+          <div style="display: flex; flex-direction: column; gap: 12px;">
+            <div style="font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--color-accent-700);">Салбар бүрийн дүгнэлт, зөвлөмж</div>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+              <sc-for list="{{ pillarRows }}" as="p" hint-placeholder-count="8">
+                <div class="card" style="padding: 20px; display: flex; flex-direction: column; gap: 10px;">
+                  <div style="display: flex; justify-content: space-between; align-items: baseline;">
+                    <div style="font-weight: 700; font-size: 16px;">{{ p.name }}</div>
+                    <div style="display: flex; align-items: baseline; gap: 10px;">
+                      <span style="font-size: 12px; letter-spacing: .08em; text-transform: uppercase; font-weight: 700; color: {{ p.bandColor }};">{{ p.band }}</span>
+                      <b style="font-family: var(--font-heading); font-size: 24px;">{{ p.score }}</b>
+                    </div>
+                  </div>
+                  <div style="height: 8px; background: var(--color-neutral-200);"><div style="height: 8px; background: var(--color-accent); width: {{ p.score }}%;"></div></div>
+                  <div style="font-size: 13.5px; color: var(--color-neutral-700); line-height: 1.55;">{{ p.advice }}</div>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+
+          <div class="card" style="padding: 28px;">
+            <div class="card-kicker" style="color: var(--color-accent-700);">AI дүгнэлт</div>
+            <p style="font-size: 15px; line-height: 1.7; margin: 14px 0 0; white-space: pre-line;">{{ aiSummary }}</p>
+          </div>
+        </div>
+      </sc-if>
+
+      <!-- PAYMENT PANEL -->
+      <sc-if value="{{ payOpen }}" hint-placeholder-val="{{ false }}">
+        <div class="dialog-backdrop" style="position: fixed; inset: 0; background: rgba(32,30,29,.55); display: flex; align-items: center; justify-content: center; z-index: 50; padding: 24px;">
+          <div class="dialog elev-lg" data-screen-label="Payment" style="background: var(--color-bg); max-width: 780px; width: 100%; padding: 0; max-height: 90vh; overflow: auto;">
+
+            <sc-if value="{{ payForm }}" hint-placeholder-val="{{ true }}">
+              <div style="display: grid; grid-template-columns: 300px 1fr;">
+                <div style="background: var(--color-neutral-100); border-right: 2px solid var(--color-divider); padding: 28px; display: flex; flex-direction: column; gap: 14px; align-items: flex-start;">
+                  <div style="font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--color-neutral-600);">QR уншуулж төлөх</div>
+                  <img src="uploads/IMG_7913.jpg" alt="Төлбөрийн QR" style="width: 100%; border: 2px solid var(--color-text); display: block;">
+                  <div style="font-family: var(--font-heading); font-weight: 800; font-size: 30px;">{{ priceFmt }}₮</div>
+                  <div style="font-size: 13px; color: var(--color-neutral-600); line-height: 1.6;">Банкны апп эсвэл QPay-ээр уншуулна уу.</div>
+                  <button class="btn btn-secondary btn-block" onClick="{{ payQpay }}">QPay-ээр төлөх</button>
+                </div>
+                <div style="padding: 28px; display: flex; flex-direction: column; gap: 18px; align-items: flex-start;">
+                  <div style="display: flex; justify-content: space-between; width: 100%; align-items: flex-start;">
+                    <div style="font-family: var(--font-heading); font-weight: 800; font-size: 24px;">Бүрэн тайлан авах</div>
+                    <button class="btn btn-ghost btn-icon" onClick="{{ closePay }}" style="font-size: 18px;">✕</button>
+                  </div>
+                  <div style="font-size: 14px; color: var(--color-neutral-700); line-height: 1.6;">Төлбөр баталгаажсны дараа AI бүрэн тайлан (PDF) доорх имэйл хаяг руу автоматаар илгээгдэнэ.</div>
+                  <div class="field" style="width: 100%;"><label>Тайлан хүлээн авах имэйл</label><input class="input" value="{{ email }}" onChange="{{ setEmail }}" placeholder="tany@email.mn" type="email"></div>
+                  <sc-if value="{{ payError }}" hint-placeholder-val="{{ false }}">
+                    <div style="font-size: 13px; color: var(--color-accent-700);">{{ payError }}</div>
+                  </sc-if>
+                  <div style="border-top: 2px solid var(--color-divider); width: 100%; padding-top: 16px; display: flex; flex-direction: column; gap: 8px;">
+                    <div style="display: flex; justify-content: space-between; font-size: 14px;"><span>AI бүрэн тайлан</span><span>{{ priceFmt }}₮</span></div>
+                    <div style="display: flex; justify-content: space-between; font-weight: 700; font-size: 16px;"><span>Нийт</span><span>{{ priceFmt }}₮</span></div>
+                  </div>
+                  <button class="btn btn-primary btn-block" onClick="{{ confirmPay }}" style="font-size: 16px; padding: 14px 20px;">Төлбөр төлсөн — шалгах</button>
+                  <div style="font-size: 12px; color: var(--color-neutral-500);">Төлбөр 1–2 минутын дотор автоматаар баталгаажна.</div>
+                </div>
+              </div>
+            </sc-if>
+
+            <sc-if value="{{ payChecking }}" hint-placeholder-val="{{ false }}">
+              <div style="padding: 64px 40px; display: flex; flex-direction: column; align-items: center; gap: 20px;">
+                <div style="width: 220px; height: 4px; background: var(--color-neutral-200); overflow: hidden;"><div style="height: 4px; background: var(--color-accent); transform-origin: left; animation: msPulse 1.8s linear forwards;"></div></div>
+                <div style="font-family: var(--font-heading); font-weight: 700; font-size: 20px; animation: msBlink 1.1s infinite;">Төлбөрийг шалгаж байна...</div>
+              </div>
+            </sc-if>
+
+            <sc-if value="{{ paySent }}" hint-placeholder-val="{{ false }}">
+              <div style="padding: 56px 48px; display: flex; flex-direction: column; align-items: flex-start; gap: 16px;">
+                <div class="tag tag-accent">✓ ТӨЛБӨР БАТАЛГААЖЛАА</div>
+                <div style="font-family: var(--font-heading); font-weight: 800; font-size: 28px;">Тайлан илгээгдлээ</div>
+                <div style="font-size: 15px; color: var(--color-neutral-700); line-height: 1.6;">Захиалга <b>#{{ orderNo }}</b> — AI бүрэн тайлан (PDF) <b>{{ email }}</b> хаяг руу илгээгдлээ. Ирээгүй бол Spam хавтсаа шалгаарай.</div>
+                <button class="btn btn-primary" onClick="{{ viewReport }}" style="font-size: 16px; padding: 14px 24px;">Тайлангаа онлайнаар үзэх →</button>
+              </div>
+            </sc-if>
+
+          </div>
+        </div>
+      </sc-if>
+
+    </div>
+  </sc-if>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;: {&quot;width&quot;: 1280, &quot;height&quot;: 900}, &quot;price&quot;: {&quot;editor&quot;: &quot;int&quot;, &quot;default&quot;: 19900, &quot;tsType&quot;: &quot;number&quot;, &quot;min&quot;: 0, &quot;max&quot;: 100000, &quot;step&quot;: 100, &quot;section&quot;: &quot;Төлбөр&quot;}, &quot;demoUnlock&quot;: {&quot;editor&quot;: &quot;boolean&quot;, &quot;default&quot;: false, &quot;tsType&quot;: &quot;boolean&quot;, &quot;section&quot;: &quot;Демо&quot;}}">
+const PILLARS = [
+  { key: 'health', name: 'Эрүүл мэнд' },
+  { key: 'mental', name: 'Сэтгэл зүй' },
+  { key: 'finance', name: 'Санхүү' },
+  { key: 'career', name: 'Карьер' },
+  { key: 'relationship', name: 'Харилцаа' },
+  { key: 'social', name: 'Нийгэм' },
+  { key: 'growth', name: 'Хөгжил' },
+  { key: 'purpose', name: 'Зорилго' },
+];
+
+const QUESTIONS = [
+  // Эрүүл мэнд
+  { p: 0, text: 'Та долоо хоногт хэр олон удаа хөдөлгөөн хийдэг вэ?', hook: 'Тогтмол хөдөлгөөн нь эрт нас барах эрсдэлийг 30% хүртэл бууруулдаг — энэ бол хамгийн хямд “эм”.', labels: ['😴 Огт хийдэггүй', '🚶 Хааяа нэг алхдаг', '🏃 Долоо хоногт 1–2 удаа', '💪 3–4 удаа', '🔥 Бараг өдөр бүр'] },
+  { p: 0, text: 'Та шөнөдөө сайн унтаж, сэргэг сэрж чаддаг уу?', hook: '7 цагаас бага унтдаг хүний шийдвэр гаргах чадвар согтуу хүнийхтэй ойролцоо болдог гэдгийг судалгаа харуулсан.', labels: ['🧟 Байнга ядарсан сэрдэг', '😪 Ихэвчлэн дутуу', '😐 Дунд зэрэг', '😌 Ихэвчлэн сайн', '🛌 Гүн, сэргэг сэрдэг'] },
+  { p: 0, text: 'Та эрүүл хооллохыг хичээдэг үү?', hook: 'Таны тархины 20% энерги хоолноос шууд хамаардаг — юу идэж байгаа чинь юу бодохыг чинь тодорхойлдог.', labels: ['🍟 Юу таарна түүгээр', '🍕 Түргэн хоол давамгай', '🥪 Хагас хагасаар', '🥗 Ихэвчлэн эрүүл', '🌱 Маш ухамсартай'] },
+  // Сэтгэл зүй
+  { p: 1, text: 'Стресс ирэхэд та тайвширч чаддаг уу?', hook: 'Архаг стресс нь дархлааг сулруулж, ой тогтоолтын төвийг физикээр багасгадаг — удирдаж сурах нь ур чадвар.', labels: ['🌋 Байнга дарамтанд', '😫 Ихэнхдээ давалгаанд', '🌊 Дээш доош', '🧘 Ихэвчлэн тайван', '🏔 Тогтвортой тайван'] },
+  { p: 1, text: 'Таны сэтгэл санаа ихэвчлэн ямар байдаг вэ?', hook: 'Сэтгэлийн тогтвортой байдал нь орлого, харилцаа, эрүүл мэндийн урт хугацааны хамгийн хүчтэй урьдчилан таамаглагч юм.', labels: ['🎢 Роллер коастер шиг', '⛈ Ихэвчлэн хэлбэлздэг', '⛅ Дунд зэрэг', '☀️ Ихэвчлэн эерэг', '🌈 Маш тогтвортой'] },
+  { p: 1, text: 'Та өөртөө зориулж амрах цаг гаргадаг уу?', hook: '“Юу ч хийхгүй” цаг нь тархины default network-ийг асааж, бүтээлч шийдлүүд яг тэнд төрдөг.', labels: ['🌀 Хэзээ ч үгүй', '⏳ Маш ховор', '🕯 Заримдаа', '🍵 Долоо хоног бүр', '🧘‍♂️ Өдөр бүр'] },
+  // Санхүү
+  { p: 2, text: 'Та мөнгөө хаана зарцуулж байгаагаа мэддэг үү?', hook: 'Мөнгөө хянадаг хүмүүс хянадаггүй хүмүүсээс дунджаар 2 дахин хурдан хуримтлал үүсгэдэг.', labels: ['🙈 Огт хардаггүй', '😬 Сар дуусахад л', '📝 Заримдаа бүртгэдэг', '📊 Сар бүр төсөвтэй', '🧮 Бүх зүйл бүртгэлтэй'] },
+  { p: 2, text: 'Гэнэт мөнгө хэрэг болбол танд нөөц бий юу?', hook: '3 сарын зардлын хуримтлал нь санхүүгийн стрессийг хамгийн эрс бууруулдаг нэг тоо.', labels: ['🕳 Огт байхгүй', '💸 Хэдхэн хоногийнх', '👛 1 сар орчим', '💰 2–3 сарынх', '🏦 3+ сарынх'] },
+  { p: 2, text: 'Та ирээдүйдээ зориулж мөнгө хадгалдаг уу?', hook: 'Давхар өсөлт — эрт эхэлсэн жижиг дүн нь хожуу эхэлсэн том дүнг гүйцдэг.', labels: ['🚫 Огт үгүй', '🌱 Дөнгөж бодож байгаа', '🪙 Заримдаа хийдэг', '📈 Тогтмол хийдэг', '🚀 Стратегитай хийдэг'] },
+  // Карьер
+  { p: 3, text: 'Таны ажил танд таалагддаг уу?', hook: 'Хүн амьдралынхаа 90,000 цагийг ажилдаа зарцуулдаг — тэр цаг утгатай байх ёстой.', labels: ['🪫 Зүгээр л тэвчиж байна', '😑 Ихэнхдээ уйтгартай', '⚖️ Дунд зэрэг', '✨ Ихэвчлэн урамтай', '🎯 Яг миний зам'] },
+  { p: 3, text: 'Та ажил дээрээ өсөж байна гэж мэдэрдэг үү?', hook: 'Өсөлт зогссон мэдрэмж нь ажлаас гарах хүслийн №1 шалтгаан — цалингаас ч илүү.', labels: ['🧊 Зогсонги байна', '🐌 Маш удаан', '🚶 Жаахан ахидаг', '🏃 Тогтмол өсч байна', '🚀 Хурдацтай өсч байна'] },
+  { p: 3, text: 'Та ажил, амралтаа тэнцвэртэй авч явж чаддаг уу?', hook: 'Burnout нь ДЭМБ-ын албан ёсны оношлогдох үзэгдэл болсон — тэнцвэр бол сул тал биш, стратеги.', labels: ['🔥 Шатаж дууссан', '😮‍💨 Ихэвчлэн ажил давамгай', '⚖️ Хааяа алддаг', '🌿 Ихэвчлэн тэнцвэртэй', '🏝 Маш сайн барьдаг'] },
+  // Харилцаа
+  { p: 4, text: 'Та хамгийн ойр хүмүүстэйгээ хэр дотно вэ?', hook: 'Харвардын 85 жилийн судалгааны дүгнэлт: аз жаргалын №1 таамаглагч бол харилцааны чанар.', labels: ['🏝 Тусгаарлагдсан', '📱 Гадарга дээр л', '🤝 Дунд зэрэг', '❤️ Гүн холбоотой', '🫂 Маш гүн, итгэлтэй'] },
+  { p: 4, text: 'Та хайртай хүмүүстээ цаг гаргаж чаддаг уу?', hook: 'Харилцаа бол данс шиг — тогтмол “хадгаламж” хийхгүй бол хоосрол хуримтлагддаг.', labels: ['⏰ Бараг гаргадаггүй', '😔 Хүсдэг ч амждаггүй', '📅 Заримдаа', '💐 Долоо хоног бүр', '🌟 Тэргүүн зэрэглэлд тавьдаг'] },
+  { p: 4, text: 'Санал зөрөхөд та ярилцаж шийддэг үү?', hook: 'Судалгаагаар салалтыг таамагладаг зүйл нь хэрүүл биш — дарагдсан, яриагүй дургүйцэл юм.', labels: ['🌋 Дарж хуримтлуулдаг', '🙊 Ихэвчлэн зайлсхийдэг', '😤 Заримдаа ярьдаг', '🗣 Ихэвчлэн ярилцдаг', '🕊 Үргэлж нээлттэй шийддэг'] },
+  // Нийгэм
+  { p: 5, text: 'Та найзуудтайгаа хэр олон уулздаг вэ?', hook: 'Ганцаардал нь өдөрт 15 янжуур татахтай тэнцэх эрүүл мэндийн эрсдэл гэж судлаачид үздэг.', labels: ['🏚 Бараг уулздаггүй', '🌫 Хэдэн сард нэг', '☕ Сард нэг орчим', '🍜 Долоо хоног бүр', '🎉 Байнга холбоотой'] },
+  { p: 5, text: 'Хэцүү үед туслах хүн танд бий юу?', hook: 'Хэцүү үед түшиж болох 3 хүн байх нь стрессийн нөлөөг эрс зөөлрүүлдэг.', labels: ['🚪 Хэн ч алга', '🤔 Магадгүй 1 хүн', '👥 2–3 хүн бий', '🛟 Найдвартай хүрээлэлтэй', '🏰 Хүчтэй дэмжлэгтэй'] },
+  { p: 5, text: 'Та шинэ хүмүүстэй танилцах дуртай юу?', hook: 'Шинэ боломжуудын ихэнх нь ойрын биш, “сул холбоос” буюу таны танилын танилаас ирдэг.', labels: ['🐚 Огт үгүй', '😶 Маш ховор', '👋 Заримдаа', '🤝 Тогтмол танилцдаг', '🌐 Идэвхтэй тэлдэг'] },
+  // Хөгжил
+  { p: 6, text: 'Та шинэ зүйл сурахад цаг гаргадаг уу?', hook: 'Суралцах хурд бол шинэ “цалин” — хамгийн амжилттай хүмүүс өдөр бүр уншиж, суралцдаг.', labels: ['📵 Огт сурдаггүй', '🥱 Хааяа нэг', '📖 Сард хэдэн цаг', '📚 Долоо хоног бүр', '🧠 Өдөр бүр сурдаг'] },
+  { p: 6, text: 'Та тавьсан зорилгоо биелүүлж чаддаг уу?', hook: 'Амжилт нь урам зоригоос биш — өдөр бүр давтагддаг жижиг системээс бүтдэг гэж James Clear нотолсон.', labels: ['🎈 Зорилго тавьдаггүй', '📃 Тавьдаг ч мартдаг', '🔁 Заримдаа хэрэгжүүлдэг', '📆 Системтэй хөтөлдөг', '⚙️ Дадал болгож чадсан'] },
+  { p: 6, text: 'Та шинэ зүйл туршиж, сорилт хийж үздэг үү?', hook: 'Тархи зөвхөн “эвгүй” мэдрэмжийн бүсэд шинэ мэдрэлийн холбоо үүсгэдэг — өсөлт тэнд л болдог.', labels: ['🛋 Хэзээ ч гардаггүй', '😅 Маш ховор', '🚪 Заримдаа', '🧗 Тогтмол сорьдог', '⚡ Байнга сорилттой амьдардаг'] },
+  // Зорилго
+  { p: 7, text: 'Та юуны төлөө амьдарч байгаагаа мэддэг үү?', hook: 'Ikigai буюу оршихуйн утгатай хүмүүс дунджаар 7 жил урт насалдаг гэж Окинавагийн судалгаа харуулжээ.', labels: ['🌫 Огт мэдэхгүй', '❓ Бүрхэг', '🧭 Ерөнхийдөө гадарладаг', '🗺 Нэлээд тодорхой', '💎 Маш тодорхой'] },
+  { p: 7, text: 'Өдөр тутмын амьдрал тань зорилготой тань нийцдэг үү?', hook: 'Зорилго ба өдөр тутмын зөрүү нь “busy but empty” буюу завгүй ч хоосон мэдрэмжийн эх үүсвэр.', labels: ['🎲 Огт уялддаггүй', '🌪 Ихэвчлэн урсгалаар', '🔗 Хааяа уялддаг', '🧩 Ихэвчлэн уялддаг', '🎯 Бүрэн уялдсан'] },
+  { p: 7, text: 'Та бусдад тусалж, хувь нэмэр оруулдаг уу?', hook: 'Бусдад туслах үйлдэл нь тархинд “helper’s high” үүсгэж, сэтгэл ханамжийг хамгийн урт хадгалдаг.', labels: ['🪞 Зөвхөн өөртөө', '🤷 Бараг үгүй', '🎗 Заримдаа', '🤲 Тогтмол оруулдаг', '🌍 Амьдралын минь хэсэг'] },
+];
+
+const ADVICE = {
+  health: {
+    low: 'Бие махбод тань дэмжлэг хүсч байна. Өдөрт 20 минутын алхалтаас эхлээрэй — хамгийн энгийн, хамгийн үр дүнтэй эхлэл.',
+    mid: 'Суурь сайн байна. Одоо унтах цаг болон хоолны дэглэмээ жигдрүүлбэл оноо тань хурдан өснө.',
+    high: 'Маш сайн! Одоогийн дадлаа хадгалаад, жилийн эрүүл мэндийн үзлэгээ мартуузай.' },
+  mental: {
+    low: 'Сэтгэл санаа тань анхаарал хүсч байна. Өдөрт 10 минут утасгүй, чимээгүй цаг гаргахаас эхлээрэй.',
+    mid: 'Стрессээ ерөнхийдөө удирдаж байна. Амралтын цагаа урьдчилан төлөвлөвөл тогтвортой байдал нэмэгдэнэ.',
+    high: 'Сэтгэлийн тогтвортой байдал тань бусад бүх салбарын суурь болж байна. Үргэлжлүүлээрэй!' },
+  finance: {
+    low: 'Мөнгөний урсгалаа харахаас бүх зүйл эхэлдэг. Энэ сард зөвхөн зарлагаа бүртгээрэй — өөрчлөх шаардлагагүй, зөвхөн харах.',
+    mid: 'Хяналт байна, одоо хуримтлалын ээлж. Орлогынхоо 10%-ийг автоматаар тусад нь шилжүүлж эхлээрэй.',
+    high: 'Санхүүгийн сахилга бат тань өндөр байна. Дараагийн алхам — урт хугацааны хөрөнгө оруулалтын стратеги.' },
+  career: {
+    low: 'Ажил тань энерги өгөхийн оронд авч байж магадгүй. Юу таныг урамшуулдгийг бичиж, жижиг өөрчлөлтөөс эхлээрэй.',
+    mid: 'Тогтвортой байна. Улирал бүр нэг шинэ ур чадвар сурах зорилт тавьбал өсөлт мэдрэгдэнэ.',
+    high: 'Карьер тань зөв замдаа байна. Одоо бусдад mentor болох нь таны өсөлтийг дараагийн түвшинд гаргана.' },
+  relationship: {
+    low: 'Ойр дотны холбоо тань суларсан байж магадгүй. Долоо хоногт нэг чанартай, утасгүй уулзалтаас эхлээрэй.',
+    mid: 'Холбоо сайн байна. Талархлаа илүү олон удаа хэлж илэрхийлбэл харилцаа улам гүнзгийрнэ.',
+    high: 'Харилцаа тань таны хамгийн том хөрөнгө. Үүнийг хамгаалж, тогтмол цаг гаргасаар байгаарай.' },
+  social: {
+    low: 'Ганцаардал аажмаар хуримтлагддаг. Энэ сард нэг найздаа залгаж, уулзалт товлохоос эхлээрэй.',
+    mid: 'Хүрээлэл тань дунд зэрэг идэвхтэй. Сард 2 удаагийн тогтмол уулзалт товлох нь хамгийн хялбар алхам.',
+    high: 'Нийгмийн холбоо тань хүчтэй байна — энэ нь стрессийн үед таны хамгаалалт болдог.' },
+  growth: {
+    low: 'Өсөлт зогссон мэдрэмж хэнд ч ирдэг. Өдөрт 15 минут унших жижиг дадал л том өөрчлөлтийн эхлэл.',
+    mid: 'Суралцах хүсэл байна. Тодорхой нэг чиглэл сонгож 90 хоног төвлөрвөл үр дүн нь мэдрэгдэнэ.',
+    high: 'Та тасралтгүй суралцагч байна. Сурснаа бусадтай хуваалцах нь ойлголтыг тань улам гүнзгийрүүлнэ.' },
+  purpose: {
+    low: '“Яагаад” гэдгээ олох нь аялал — өдөр бүр 5 минут “өнөөдөр юу утгатай байв” гэж бичихээс эхлээрэй.',
+    mid: 'Чиглэл тань ерөнхийдөө тодорхой байна. Урт хугацааны зорилгоо бичиж, сар бүр эргэж хараарай.',
+    high: 'Тодорхой зорилготой амьдрал — таны хамгийн том давуу тал. Энэ нь бусад салбарыг тань чиглүүлж байна.' },
+};
+
+const FOCUS_REASONS = {
+  health: 'Эрүүл мэнд бол бусад бүх салбарын эрчим хүчний эх үүсвэр — энд оруулсан хөрөнгө хамгийн хурдан үр дүнгээ өгдөг.',
+  mental: 'Сэтгэл зүй доогуур үед бусад салбарын амжилт ч мэдрэгддэггүй — эндээс эхлэх нь бүх зүйлийг хөнгөвчилнө.',
+  finance: 'Санхүүгийн стресс нь нойр, харилцаа, ажлын бүтээмжид шууд нөлөөлдөг — энэ салбарыг өргөх нь дам нөлөөгөөр бусдыг өргөнө.',
+  career: 'Сэрүүн цагийн тань ихэнх нь ажилд өнгөрдөг тул энд гарсан ахиц амьдралын бүх хэсэгт мэдрэгдэнэ.',
+  relationship: 'Судалгаагаар урт хугацааны аз жаргалын №1 таамаглагч бол ойр дотны харилцааны чанар юм.',
+  social: 'Дэмжлэгтэй хүрээлэл нь стрессийн нөлөөг зөөлрүүлж, шинэ боломжийн эх үүсвэр болдог.',
+  growth: 'Өсөлтийн мэдрэмж нь урам зориг, өөртөө итгэх итгэлийн гол тэжээл — энд ахиц гарвал бусад нь дагана.',
+  purpose: 'Зорилго тодорхой болмогц өдөр тутмын шийдвэрүүд хөнгөрч, бусад салбарын оноо аяндаа өсдөг.',
+};
+
+const LABELS = [
+  { min: 0, label: 'Анхаарал шаардлагатай', desc: 'Хэд хэдэн салбарт яаралтай өөрчлөлт хэрэгтэй байна. Сайн мэдээ: хамгийн доод цэгээс өсөлт хамгийн хурдан байдаг.' },
+  { min: 40, label: 'Хөгжиж буй', desc: 'Суурь тавигдсан ч тэнцвэр алдагдсан салбарууд байна. Нэг салбарт төвлөрвөл нийт оноо хурдан өснө.' },
+  { min: 60, label: 'Тогтвортой', desc: 'Таны амьдралын суурь тогтвортой байна. Одоо сул талууд дээрээ зорилтот ажиллах үе.' },
+  { min: 75, label: 'Сайн', desc: 'Ихэнх салбарт хүчтэй байна. Дараагийн түвшинд гарахад нарийвчилсан стратеги хэрэгтэй.' },
+  { min: 88, label: 'Маш сайн', desc: 'Та дээд 5%-д байна. Одоо гол сорилт — үүнийг урт хугацаанд хадгалах систем.' },
+];
+
+const GOALS = {
+  health: 'Долоо хоногт 3 удаа, 30 минутын хөдөлгөөнийг хуанлидаа тогтмол цаг болгон оруул.',
+  mental: 'Өдөр бүр 10 минутын дэлгэцгүй, тайван цагийг өглөөний дадал болго.',
+  finance: 'Энэ сард бүх зарлагаа бүртгэж, дараа сарын төсвөө урьдчилан гарга.',
+  career: 'Карьерийн 1 жилийн зорилгоо бичиж, долоо хоног бүр 1 алхам хий.',
+  relationship: 'Хамгийн ойр хүнтэйгээ долоо хоног бүр утасгүй, 1 цагийн чанартай уулзалт хий.',
+  social: 'Сард 2 удаа найз нөхөдтэйгөө уулзах товыг урьдчилан тавь.',
+  growth: 'Өдөр бүр 20 минут ном унших эсвэл сургалт үзэх дадал эхлүүл.',
+  purpose: 'Долоо хоног бүр “энэ долоо хоног юу утгатай байв” гэсэн 5 минутын тэмдэглэл хөтөл.',
+};
+
+class Component extends DCLogic {
+  state = {
+    view: 'landing',
+    name: '', age: '', job: '', gender: -1, rel: -1,
+    qIndex: 0, answers: {},
+    loadingStep: 0,
+    payState: 'closed', // closed | form | checking | sent
+    unlocked: false,
+    email: '', payError: '',
+    orderNo: Math.floor(100000 + Math.random() * 900000),
+  };
+
+  go(view) { this.setState({ view }); window.scrollTo(0, 0); }
+
+  startLoading() {
+    this.setState({ view: 'loading', loadingStep: 0 });
+    window.scrollTo(0, 0);
+    const msgs = 4;
+    let i = 0;
+    const t = setInterval(() => {
+      i++;
+      if (i >= msgs) { clearInterval(t); this.go('result'); }
+      else this.setState({ loadingStep: i });
+    }, 1100);
+  }
+
+  pillarScores() {
+    const sums = PILLARS.map(() => ({ s: 0, n: 0 }));
+    QUESTIONS.forEach((q, i) => {
+      const a = this.state.answers[i];
+      if (a) { sums[q.p].s += a; sums[q.p].n++; }
+    });
+    return sums.map(x => x.n ? Math.round((x.s / x.n - 1) / 4 * 100) : 0);
+  }
+
+  renderVals() {
+    const st = this.state;
+    const price = this.props.price ?? 19900;
+    const priceFmt = price.toLocaleString('en-US').replace(/,/g, "'");
+    const q = QUESTIONS[st.qIndex] || QUESTIONS[0];
+
+    const segStyle = (sel) => `flex:1; cursor:pointer; padding:10px 12px; font-family:var(--font-body); font-size:14px; border:2px solid ${sel ? 'var(--color-accent)' : 'var(--color-divider)'}; background:${sel ? 'var(--color-accent-100)' : 'var(--color-bg)'}; color:var(--color-text); text-align:left;`;
+
+    const genderOpts = ['Эрэгтэй', 'Эмэгтэй', 'Бусад'].map((label, i) => ({
+      label, style: segStyle(st.gender === i), pick: () => this.setState({ gender: i }),
+    }));
+    const relOpts = ['Ганц бие', 'Харилцаатай', 'Гэрлэсэн'].map((label, i) => ({
+      label, style: segStyle(st.rel === i), pick: () => this.setState({ rel: i }),
+    }));
+
+    const selected = st.answers[st.qIndex];
+    const likert = q.labels.map((label, i) => {
+      const n = i + 1;
+      const sel = selected === n;
+      return {
+        n, label,
+        style: `display:flex; align-items:center; gap:14px; width:100%; box-sizing:border-box; text-align:left; cursor:pointer; padding:16px 18px; font-family:var(--font-body); font-size:16px; color:var(--color-text); border:2px solid ${sel ? 'var(--color-accent)' : 'var(--color-divider)'}; background:${sel ? 'var(--color-accent-100)' : 'var(--color-bg)'}; transition: border-color .15s, background .15s;`,
+        pick: () => {
+          this.setState({ answers: { ...st.answers, [st.qIndex]: n } });
+          setTimeout(() => {
+            if (this.state.qIndex < QUESTIONS.length - 1) {
+              this.setState({ qIndex: this.state.qIndex + 1 });
+              window.scrollTo(0, 0);
+            } else {
+              this.startLoading();
+            }
+          }, 280);
+        },
+      };
+    });
+
+    const scores = this.pillarScores();
+    const answered = Object.keys(st.answers).length;
+    // weighted overall + critical penalty
+    let overall = Math.round(scores.reduce((a, b) => a + b, 0) / 8);
+    const critical = scores.filter(s => s < 35).length;
+    overall = Math.max(0, overall - critical * 3);
+    const labelDef = [...LABELS].reverse().find(l => overall >= l.min) || LABELS[0];
+
+    // radar points
+    const pts = scores.map((s, i) => {
+      const ang = (i * 45 - 90) * Math.PI / 180;
+      const r = Math.max(6, s / 100 * 120);
+      return `${(150 + r * Math.cos(ang)).toFixed(1)},${(150 + r * Math.sin(ang)).toFixed(1)}`;
+    }).join(' ');
+
+    const ranked = PILLARS.map((p, i) => ({ name: p.name, key: p.key, score: scores[i] })).sort((a, b) => b.score - a.score);
+    const strengths = ranked.slice(0, 3);
+    const weaknesses = [...ranked].reverse().slice(0, 3);
+    const priority = weaknesses[0] || ranked[0];
+
+    const firstName = st.name.trim() || 'Таны';
+    const aiSummary = `${firstName === 'Таны' ? 'Таны' : firstName + ' — таны'} нийт Life Score ${overall} буюу “${labelDef.label}” түвшинд байна.\n\nХамгийн хүчтэй тал тань ${strengths[0]?.name} (${strengths[0]?.score} оноо) — энэ бол таны бусад салбарыг өргөх хөшүүрэг. Харин ${priority.name} (${priority.score} оноо) хамгийн их анхаарал шаардаж байна: энэ салбар доогуур байх нь бусад 7 салбарын өсөлтийг далд байдлаар удаашруулдаг.\n\nЭхний 30 хоногт зөвхөн нэг зүйлд төвлөр: ${GOALS[priority.key]} Судалгаагаар нэг салбарт 90 хоног төвлөрсөн хүмүүсийн нийт оноо дунджаар 9–14 пунктээр өсдөг.\n\nДараагийн үнэлгээгээ 30 хоногийн дараа хийж, ахицаа хэмжээрэй.`;
+
+    const loadingMsgs = ['Таны үр дүнг боловсруулж байна...', 'Асуултуудыг шинжилж байна...', 'AI зөвлөгөө бэлдэж байна...', 'Тайлан бэлэн боллоо.'];
+
+    const navHints = { landing: 'ТАНЫ АМЬДРАЛЫН КРЕДИТ ОНОО', info: 'ҮНЭЛГЭЭ', quiz: `АСУУЛТ ${st.qIndex + 1}/${QUESTIONS.length}`, loading: 'БОЛОВСРУУЛЖ БАЙНА', result: 'ТАНЫ ҮР ДҮН' };
+
+    return {
+      isLanding: st.view === 'landing',
+      isInfo: st.view === 'info',
+      isQuiz: st.view === 'quiz',
+      isLoading: st.view === 'loading',
+      isResult: st.view === 'result',
+      navHint: navHints[st.view] || '',
+      priceFmt,
+
+      goLanding: () => this.go('landing'),
+      startAssessment: () => this.go('info'),
+
+      infoName: st.name, infoAge: st.age, infoJob: st.job,
+      setName: (e) => this.setState({ name: e.target.value }),
+      setAge: (e) => this.setState({ age: e.target.value }),
+      setJob: (e) => this.setState({ job: e.target.value }),
+      genderOpts, relOpts,
+      startQuiz: () => { this.setState({ qIndex: 0 }); this.go('quiz'); },
+
+      qPillar: PILLARS[q.p].name,
+      qText: q.text, qHook: q.hook,
+      qNum: st.qIndex + 1, qTotal: QUESTIONS.length,
+      progressPct: Math.round(answered / QUESTIONS.length * 100),
+      likert,
+      prevQuestion: () => { if (st.qIndex > 0) this.setState({ qIndex: st.qIndex - 1 }); else this.go('info'); },
+
+      loadingMsg: loadingMsgs[Math.min(st.loadingStep, 3)],
+
+      resultName: (st.name.trim() || 'ТА').toUpperCase(),
+      overall, scoreLabel: labelDef.label, scoreDesc: labelDef.desc,
+      radarPoints: pts,
+      locked: !st.unlocked && (this.props.demoUnlock ?? false) === false,
+      unlockedView: st.unlocked || (this.props.demoUnlock ?? false) === true,
+      strengths, weaknesses,
+      monthlyGoal: GOALS[priority.key],
+      focusName: priority.name,
+      focusScore: priority.score,
+      focusReason: `${priority.name} нь таны хамгийн бага оноотой (${priority.score}) салбар тул энэ сард яг энд төвлөрөхийг санал болгож байна. ${FOCUS_REASONS[priority.key]} Нэг дор бүгдийг биш, нэг салбарыг сонгож сайжруулах нь хамгийн үр дүнтэй арга гэдгийг зан үйлийн судалгаанууд харуулдаг.`,
+      balance: Math.max(...scores) - Math.min(...scores),
+      balanceLabel: (Math.max(...scores) - Math.min(...scores)) <= 15 ? 'Маш тэнцвэртэй' : (Math.max(...scores) - Math.min(...scores)) <= 35 ? 'Харьцангуй тэнцвэртэй' : 'Тэнцвэр алдагдсан',
+      pillarRows: PILLARS.map((p, i) => {
+        const s = scores[i];
+        const band = s >= 75 ? 'high' : s >= 50 ? 'mid' : 'low';
+        return {
+          name: p.name, score: s,
+          band: band === 'high' ? 'Хүчтэй' : band === 'mid' ? 'Дунд' : 'Анхаарах',
+          bandColor: band === 'high' ? 'var(--color-accent-700)' : band === 'mid' ? 'var(--color-neutral-600)' : 'var(--color-accent)',
+          advice: ADVICE[p.key][band],
+        };
+      }),
+      aiSummary,
+      orderNo: st.orderNo,
+
+      payOpen: st.payState !== 'closed',
+      payForm: st.payState === 'form',
+      payChecking: st.payState === 'checking',
+      paySent: st.payState === 'sent',
+      openPay: () => this.setState({ payState: 'form', payError: '' }),
+      closePay: () => this.setState({ payState: 'closed' }),
+      email: st.email,
+      setEmail: (e) => this.setState({ email: e.target.value, payError: '' }),
+      payError: st.payError,
+      payQpay: () => this.setState({ payError: '' }),
+      confirmPay: () => {
+        const ok = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(st.email.trim());
+        if (!ok) { this.setState({ payError: 'Тайлан хүлээн авах зөв имэйл хаягаа оруулна уу.' }); return; }
+        this.setState({ payState: 'checking' });
+        setTimeout(() => this.setState({ payState: 'sent' }), 1900);
+      },
+      viewReport: () => { this.setState({ payState: 'closed', unlocked: true }); window.scrollTo(0, 0); },
+    };
+  }
+}
+</script>
+<script>
+(async () => {
+  if (!document.title || !document.title.trim()) document.title = "MyLifeScore";
+  // Prepend so page-supplied @page / break rules (deck-stage's margin:0,
+  // author CSS) keep source-order precedence over the baseline.
+  const baseCss = document.createElement('style');
+  baseCss.textContent = "@media print {\n  figure, table { break-inside: avoid; }\n  *, *::before, *::after {\n    print-color-adjust: exact; -webkit-print-color-adjust: exact;\n    backdrop-filter: none !important; -webkit-backdrop-filter: none !important;\n    animation-delay: -99s !important; animation-duration: .001s !important;\n    animation-iteration-count: 1 !important; animation-fill-mode: both !important;\n    animation-play-state: running !important; transition-duration: 0s !important;\n  }\n}";
+  document.head.prepend(baseCss);
+  if (document.readyState === 'loading') {
+    await new Promise((r) => document.addEventListener('DOMContentLoaded', r, { once: true }));
+  }
+  let ds = document.querySelector('deck-stage');
+  // whenDefined never resolves when nothing registers the element, so only
+  // await it when a <deck-stage> tag exists (and race a timeout regardless).
+  if (ds && !customElements.get('deck-stage')) {
+    try {
+      await Promise.race([
+        customElements.whenDefined('deck-stage'),
+        new Promise((r) => setTimeout(r, 3000)),
+      ]);
+    } catch (e) {}
+    ds = document.querySelector('deck-stage');
+  }
+  // dc-runtime assigns window.DCLogic at init and mounts into #dc-root on
+  // DOMContentLoaded; settle on that subtree so React has rendered before
+  // print(). Non-DC pages fall through to weighing body.
+  const isDc = !ds && 'DCLogic' in window;
+  const settleRoot = ds || (isDc ? document.getElementById('dc-root') : null) || document.body;
+  if (settleRoot) {
+    // Weigh only content children — skip script/style/template so inline
+    // Babel/CSS doesn't register as stable "content" before the framework
+    // has mounted anything.
+    const MEDIA = 'img,svg,canvas,video,picture,iframe,embed,object';
+    const weigh = () => {
+      let text = 0, media = 0;
+      for (const c of settleRoot.children) {
+        const t = c.tagName;
+        if (t === 'SCRIPT' || t === 'STYLE' || t === 'TEMPLATE') continue;
+        text += (c.textContent || '').trim().length;
+        media += c.querySelectorAll(MEDIA).length + (c.matches(MEDIA) ? 1 : 0);
+      }
+      return text + media * 100;
+    };
+    // "Non-zero and stable" alone is not sufficient to mean rendered: generic
+    // body can carry a static shell while async main content is pending, and
+    // #dc-root can carry the root DC's static text while child refs are still
+    // .sc-placeholder boxes. Gate generic on readyState 'complete', and never
+    // accept stability while a dc-runtime placeholder is present.
+    const isGeneric = settleRoot === document.body;
+    const deadline = Date.now() + 15000;
+    let last = -1, stable = 0;
+    while (Date.now() < deadline) {
+      const n = weigh();
+      const ready =
+        (!isGeneric || document.readyState === 'complete') &&
+        !settleRoot.querySelector('.sc-placeholder');
+      if (n > 0 && n === last && ready) { if (++stable >= 2) break; } else { stable = 0; }
+      last = n;
+      await new Promise((r) => setTimeout(r, 250));
+    }
+  }
+  // Project support.js may predate runtime default-seeding; push via bridge.
+  if (isDc && window.__dcSetProps && window.__dcRootName) {
+    try {
+      const dpEl = document.querySelector('script[data-dc-script]');
+      const meta = JSON.parse((dpEl && dpEl.getAttribute('data-props')) || '{}');
+      const bag = {};
+      for (const k in meta)
+        if (k[0] !== '$' && meta[k] && meta[k].default !== undefined)
+          bag[k] = meta[k].default;
+      if (Object.keys(bag).length) {
+        window.__dcSetProps(window.__dcRootName(), bag);
+        await new Promise((r) => setTimeout(r, 50));
+      }
+    } catch (e) {}
+  }
+  // Reveal content gated on scroll or visibility before printing. Lazy <img>,
+  // IntersectionObserver fade-ins, and collapsed <details> don't render while
+  // off-screen, so a long page would print with them blank or closed. Open
+  // every <details>, force native-lazy images eager, and scroll the document
+  // through its full height to trip lazy-load + IO; then wait (bounded) for the
+  // newly-triggered images. Inert for deck-stage (slides aren't scroll-gated).
+  try {
+    for (const d of document.querySelectorAll('details')) d.open = true;
+    for (const img of document.querySelectorAll('img[loading="lazy"]'))
+      img.loading = 'eager';
+    const scroller = document.scrollingElement || document.documentElement;
+    const full = Math.max(scroller.scrollHeight, document.body.scrollHeight);
+    const step = window.innerHeight || 800;
+    for (let y = 0; y <= full; y += step) {
+      window.scrollTo(0, y);
+      await new Promise((r) => requestAnimationFrame(r));
+    }
+    window.scrollTo(0, 0);
+    await Promise.race([
+      Promise.all(
+        [...document.images].map((img) =>
+          img.complete
+            ? null
+            : new Promise((res) => {
+                img.addEventListener('load', res, { once: true });
+                img.addEventListener('error', res, { once: true });
+              })
+        )
+      ),
+      new Promise((r) => setTimeout(r, 4000)),
+    ]);
+  } catch (e) {}
+  try { await document.fonts.ready; } catch (e) {}
+  // Jump every animation to its end state so print() never captures a slide
+  // mid-entrance. Ordering matters: the 0s-transition style must be live
+  // BEFORE data-deck-active is set so attribute-keyed transitions don't
+  // start a (now-0s) run from the pre-active base.
+  const st = document.createElement('style');
+  st.textContent = '*,*::before,*::after{animation-delay:-99s !important;animation-duration:.001s !important;animation-iteration-count:1 !important;animation-fill-mode:both !important;animation-play-state:running !important;transition-duration:0s !important}';
+  document.head.appendChild(st);
+  for (const d of document.querySelectorAll('deck-stage')) {
+    for (const c of d.children) {
+      const t = c.tagName;
+      if (t === 'SCRIPT' || t === 'STYLE' || t === 'TEMPLATE') continue;
+      c.setAttribute('data-deck-active', '');
+    }
+  }
+  // Re-append deck-stage's @page last so no author @page can add a margin and
+  // spill each full-bleed slide onto two sheets. Backstop for old copies.
+  if (ds) {
+    let pg = document.getElementById('deck-stage-print-page');
+    if (!pg) {
+      pg = document.createElement('style');
+      pg.textContent = '@page{size:' + (+ds.getAttribute('width') || 1920) +
+        'px ' + (+ds.getAttribute('height') || 1080) + 'px;margin:0}';
+    }
+    document.body.appendChild(pg);
+  }
+  try {
+    const sweep = () => {
+      for (const a of document.getAnimations()) {
+        try { a.finish(); } catch (e) {
+          try { a.currentTime = (a.effect && a.effect.getComputedTiming().duration) || 0; a.pause(); } catch (e2) {}
+        }
+      }
+    };
+    sweep();
+    await new Promise((r) => requestAnimationFrame(r));
+    sweep();
+    await new Promise((r) => requestAnimationFrame(r));
+  } catch (e) {}
+  // A document that owns its print CSS (the doc-page starter injects the
+  // meta at runtime; hand-rolled print designs author it) gets no automatic
+  // page geometry and keeps its forced breaks: strip the injected default
+  // @page — write time cannot see a runtime-injected meta — skip the frame
+  // override below, and skip the fakepage-flattening further down. What
+  // still applies: the print baseline and break-hygiene defaults (no @page
+  // in either; low specificity, so the document's own print CSS wins) and
+  // the break-inside relaxation on >page elements (avoid on those cannot
+  // be honored whoever authored it).
+  var ownsPrint = !!document.querySelector('meta[name="omelette-owns-print" i]');
+  if (ownsPrint) {
+    var dst = document.querySelector('style[data-omelette-print-defaults]');
+    if (dst && dst.textContent) {
+      dst.textContent = dst.textContent.replace(/@page\b[^{}]*\{[^}]*\}/, '');
+    }
+  }
+  // Size the PDF page to the rendered design unless the file opted into
+  // standard paper via @page{size:letter|A4|…} or declared print ownership
+  // via the meta above. Decks own their own @page.
+  // Wrappers (body, …) lose padding+margin so the frame sits at (0,0); the
+  // frame itself loses only margin — its padding is INSIDE the measured
+  // rect and must stay, or content shifts and leaves a gap at bottom/right.
+  var __m = null;
+  try { __m = (() => {
+  var STAMP = true;
+  var docEl = document.documentElement;
+  var doc = { width: docEl.scrollWidth, height: docEl.scrollHeight };
+  // Name-presence check, case-insensitive — the same contract as the
+  // instant-PDF path's runtime check in deck-stage-export.ts. The name is
+  // a string literal here because that file interpolates this script into
+  // its print script, so importing a shared constant from it would be a
+  // cycle; measure.test.ts pins the literal so the two cannot drift apart
+  // silently.
+  var ownsPrint = !!document.querySelector('meta[name="omelette-owns-print" i]');
+
+  var ds = document.querySelector('deck-stage');
+  if (ds) {
+    var dw = Number(ds.getAttribute('width')) || 1920;
+    var dh = Number(ds.getAttribute('height')) || 1080;
+    var n = typeof ds.length === 'number' ? ds.length : ds.children.length;
+    var idx = typeof ds.index === 'number' ? ds.index : 0;
+    var frames = [];
+    for (var i = 0; i < n; i++) frames.push({ left: 0, top: 0, width: dw, height: dh });
+    return { kind: 'deck', source: 'declared', doc: doc, frames: frames,
+      authored: frames.map(function(){return{width:true,height:true}}),
+      deck: { width: dw, height: dh, slideCount: n, index: idx },
+      signals: { paperPage: false, pxPage: false, ownsPrint: ownsPrint } };
+  }
+
+  // Declared kind: a doc-page tag names the kind outright, so no signal
+  // heuristics run (like the deck branch above, signals report false —
+  // they describe inferred classifications only). The tag alone is not
+  // trusted: the element must have upgraded (shadowRoot present), so a
+  // leftover tag whose script was deleted falls through to the heuristics
+  // that handle plain markup.
+  var stageSx = window.scrollX || 0, stageSy = window.scrollY || 0;
+  var dp = document.querySelector('doc-page');
+  if (dp && dp.shadowRoot) {
+    // Crop to the sheet, not the host — the desk around it is screen-only
+    // chrome that must not land in PNG exports.
+    var sheet = dp.shadowRoot.querySelector('.sheet');
+    var sr = (sheet || dp).getBoundingClientRect();
+    return { kind: 'paper-doc', source: 'declared', doc: doc,
+      frames: [{ left: sr.left + stageSx, top: sr.top + stageSy,
+        width: sr.width, height: sr.height }],
+      authored: [{ width: false, height: false }],
+      signals: { paperPage: false, pxPage: false, ownsPrint: ownsPrint } };
+  }
+  var paperPage = false, pxPage = false;
+  var eachRule = function (fn) {
+    for (var s = 0; s < document.styleSheets.length; s++) {
+      var rs; try { rs = document.styleSheets[s].cssRules; } catch (e) { continue; }
+      for (var r = 0; r < rs.length; r++) {
+        fn(rs[r]);
+        if (rs[r].cssRules) for (var n = 0; n < rs[r].cssRules.length; n++) fn(rs[r].cssRules[n]);
+      }
+    }
+  };
+  eachRule(function (r) {
+    if (r.type !== 6) return;
+    var m = /\bsize\s*:\s*([^;}]+)/i.exec(r.cssText || '');
+    if (!m) return;
+    if (/\b(letter|a[3-5]|legal|ledger)\b/i.test(m[1])) paperPage = true;
+    if (/\d+(?:\.\d+)?px\b/i.test(m[1])) pxPage = true;
+  });
+  var signals = { paperPage: paperPage, pxPage: pxPage, ownsPrint: ownsPrint };
+
+  var pxVal = function (v) {
+    var m = /^(\d+(?:\.\d+)?)px$/.exec(v || ''); return m ? +m[1] : 0;
+  };
+  var authoredPx = function (el, prop) {
+    if (pxVal(el.style[prop])) return true;
+    var attr = el.getAttribute(prop);
+    if (attr && /^\d+$/.test(attr)) return true;
+    var hit = false;
+    eachRule(function (r) {
+      if (hit || r.type !== 1 || !r.style) return;
+      try { if (el.matches(r.selectorText) && pxVal(r.style[prop])) hit = true; } catch (e) {}
+    });
+    return hit;
+  };
+
+  var el = document.body, rootPxW = false;
+  for (;;) {
+    var kids = [];
+    for (var c = 0; c < el.children.length; c++) {
+      var t = el.children[c].tagName;
+      if (t !== 'SCRIPT' && t !== 'STYLE' && t !== 'TEMPLATE') kids.push(el.children[c]);
+    }
+    if (kids.length !== 1 || !(kids[0] instanceof HTMLElement)) break;
+    if (STAMP) el.setAttribute('data-om-frame-wrap', '');
+    el = kids[0];
+    rootPxW = authoredPx(el, 'width');
+    if (rootPxW) break;
+  }
+  if (!rootPxW) rootPxW = authoredPx(el, 'width');
+
+  // @page{size:letter} alone is a flowing doc; with a px-width root it's a
+  // fixed sheet pretending to be paper — fall through and size to render.
+  if (paperPage && !rootPxW) {
+    return { kind: 'paper-doc', source: 'inferred', doc: doc, signals: signals,
+      frames: [{ left: 0, top: 0, width: doc.width, height: doc.height }],
+      authored: [{ width: false, height: false }] };
+  }
+
+  var sx = window.scrollX || 0, sy = window.scrollY || 0;
+  var rectOf = function (e) {
+    var r = e.getBoundingClientRect();
+    var oy; try { oy = getComputedStyle(e).overflowY; } catch (err) {}
+    var h = oy === 'visible' ? Math.max(r.height, e.scrollHeight || 0) : r.height;
+    return { left: r.left + sx, top: r.top + sy, width: r.width, height: h };
+  };
+
+  // Multi-frame: off unless the page opts in via data-om-multi-frame on the
+  // stop element — the explicit opt-in is what guards against card grids
+  // and pricing tables that match the geometry but aren't separate
+  // canvases. Two ways to name the frames, explicit first:
+  // 1. Descendants marked data-om-frame-export (the social-frames starter
+  //    marks each asset frame; shells/panels around them are presentation,
+  //    so nesting is expected). Document order.
+  // 2. Fallback, no marked descendants: direct children with an authored px
+  //    width AND height (the original geometry heuristic).
+  // Frames may be different sizes (a gallery mixes 1080×1920 stories with
+  // 728×90 banners); data-om-frame-label rides along for export filenames.
+  if (el.hasAttribute('data-om-multi-frame')) {
+    var visOk = function (e) {
+      var cs; try { cs = getComputedStyle(e); } catch (err) { return false; }
+      return cs.display !== 'none' && cs.visibility !== 'hidden' && cs.position !== 'fixed';
+    };
+    // A frame's crop is its VISUAL box — never the scrollHeight-inflated
+    // rect that rectOf computes for page roots. Shadow-DOM hover controls
+    // (image-slot's Replace bar parks 29px below its host) and similar
+    // escaping UI contribute scrollable overflow to the frame, and the
+    // inflated height both squashes the nominal-size resize and drags
+    // content below the frame into the crop. Zoom-independent; bit every
+    // slot-bearing frame.
+    var frameRectOf = function (e) {
+      var r = e.getBoundingClientRect();
+      return { left: r.left + sx, top: r.top + sy, width: r.width, height: r.height };
+    };
+    var pushCand = function (list, e) {
+      if (!visOk(e)) return;
+      var rc = frameRectOf(e);
+      if (rc.width < 2 || rc.height < 2) return;
+      var lbl = e.getAttribute('data-om-frame-label');
+      if (lbl) rc.label = lbl;
+      list.push(rc);
+    };
+    var cands = [];
+    var marked = el.querySelectorAll('[data-om-frame-export]');
+    if (marked.length) {
+      for (var mk = 0; mk < marked.length; mk++) pushCand(cands, marked[mk]);
+    } else {
+      for (var k = 0; k < el.children.length; k++) {
+        var ch = el.children[k];
+        if (!authoredPx(ch, 'width') || !authoredPx(ch, 'height')) continue;
+        pushCand(cands, ch);
+      }
+    }
+    if (cands.length >= 2) {
+      return { kind: 'multi-frame', source: 'inferred', doc: doc, signals: signals,
+        frames: cands, authored: cands.map(function(){return{width:true,height:true}}) };
+    }
+  }
+
+  if (STAMP) el.setAttribute('data-om-frame', '');
+  return { kind: 'single-canvas', source: 'inferred', doc: doc, signals: signals,
+    frames: [rectOf(el)],
+    authored: [{ width: rootPxW, height: authoredPx(el, 'height') }] };
+})(); } catch (e) {}
+  var frame = null;
+  if (!ownsPrint && __m && __m.kind === 'single-canvas') {
+    var f = __m.frames && __m.frames[0];
+    if (f && f.width >= 200 && f.height >= 200) {
+      frame = f;
+      var fst = document.createElement('style');
+      fst.textContent = '@media print{@page{size:' + Math.ceil(f.width) + 'px ' +
+        Math.ceil(f.height) + 'px;margin:0}' +
+        'html,body,[data-om-frame-wrap]{padding:0!important;margin:0!important;background:none!important}' +
+        '[data-om-frame]{margin:0!important}}';
+      document.body.appendChild(fst);
+    }
+  }
+  // Relax break-inside on oversized elements. An element taller than a
+  // printable page can't honor break-inside: avoid — browsers either overflow
+  // it or push it whole to the next page, leaving a blank gap, then break it
+  // anyway at an arbitrary point. After the final layout (content revealed,
+  // animations jumped), find elements taller than a page that still compute
+  // break-inside: avoid and reset them to auto, so the browser breaks them at
+  // their children's boundaries instead (children keep their own avoid). PAGE_PX
+  // is a conservative portrait estimate at 96 CSS px/in — Letter/A4 usable
+  // height minus our 0.5in margins — so only clearly-oversized elements are
+  // touched and under-page elements still stay whole. Skipped for decks (slides
+  // are sized to the page) and for fixed-size canvases (frame set, or an author
+  // px-based @page) — runs as before for flowing docs on letter/A4.
+  try {
+    if (!ds && !frame && !(__m && __m.signals && __m.signals.pxPage)) {
+      const PAGE_PX = 1024;
+      // Our print defaults add a real @page margin only when the source has
+      // no @page of its own; computed style can't tell us (it reports screen
+      // media), so read the injected rule directly.
+      const defaults = document.querySelector('style[data-omelette-print-defaults]');
+      const pageInset = /@page\s*\{[^}]*margin/.test(defaults ? defaults.textContent || '' : '');
+      const SEL = 'section,article,figure,table,pre,blockquote,[class~="card" i],[class~="page" i],[class~="sheet" i]';
+      for (const el of document.body.querySelectorAll(SEL)) {
+        if (el instanceof HTMLElement && el.offsetHeight > PAGE_PX) {
+          el.setAttribute('data-om-oversized', '');
+          // Fake-paged docs simulate sheets with over-tall break-after:page
+          // boxes; honoring the break spills half-blank pages and ends a
+          // colored box mid-sheet. Flow them, and (only when we own the page
+          // inset) drop the redundant padding/background via the rule below.
+          const cs = getComputedStyle(el);
+          // An owns-print doc's forced breaks are intentional sheet
+          // boundaries, never fake-paged simulation — don't strip them.
+          // The break-inside relaxation above still applies: avoid on a
+          // >page element is impossible to honor whoever authored it.
+          if (
+            !ownsPrint &&
+            (cs.breakAfter === 'page' || cs.pageBreakAfter === 'always')
+          ) {
+            el.setAttribute('data-om-fakepage', '');
+          }
+        }
+      }
+      const ost = document.createElement('style');
+      ost.textContent = '@media print{' +
+        '[data-om-oversized]{break-inside:auto !important;page-break-inside:auto !important}' +
+        '[data-om-fakepage]{break-after:auto !important;page-break-after:auto !important}' +
+        (pageInset ? '[data-om-fakepage]{padding:0 !important;background:none !important}' : '') +
+        '}';
+      document.head.appendChild(ost);
+    }
+  } catch (e) {}
+  // macOS Preview renders Skia-PDF Luminosity soft-masks as opaque grey boxes;
+  // swap the CSS that triggers them for Preview-safe forms.
+  try {
+    for (const el of document.body.querySelectorAll('*')) {
+      const cs = getComputedStyle(el);
+
+      if (cs.boxShadow !== 'none' && cs.filter === 'none') {
+        const outs = [], kept = [];
+        for (const s of cs.boxShadow.split(/,(?![^(]*[)])/)) {
+          const t = s.trim();
+          const m = t.match(/^(rgba?[(][^)]+[)]) (-?[0-9.]+px) (-?[0-9.]+px) ([0-9.]+px) -?[0-9.]+px$/);
+          if (m && parseFloat(m[4]) > 0) outs.push('drop-shadow(' + m[2] + ' ' + m[3] + ' ' + m[4] + ' ' + m[1] + ')');
+          else kept.push(t);
+        }
+        if (outs.length) {
+          el.style.setProperty('filter', outs.join(' '), 'important');
+          el.style.setProperty('box-shadow', kept.join(', ') || 'none', 'important');
+        }
+      }
+
+      const mask = cs.maskImage && cs.maskImage !== 'none' ? cs.maskImage : cs.webkitMaskImage;
+      if (mask && mask !== 'none' && cs.filter === 'none') el.style.setProperty('filter', 'opacity(1)', 'important');
+    }
+  } catch (e) {}
+  setTimeout(() => { try { window.print(); } catch (e) {} }, 200);
+})();
+</script>
+</body>
+</html>
